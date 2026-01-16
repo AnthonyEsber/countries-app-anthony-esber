@@ -4,20 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/style.css" />
-    <script src="src/main.js" defer></script>
   </head>
   <body>
     <header>
       <h1 class="title">Country Search</h1>
     </header>
-    <div class="search-controls">
-      <input
-        class="search-bar"
-        type="text"
-        placeholder="Search for a country..."
-      />
-      <button class="search-button">Search</button>
-    </div>
-    <div class="results"></div>
+    <main>
+      <div class="search-section">
+        <div class="search-controls">
+          <input
+            class="search-bar"
+            type="text"
+            placeholder="Search for a country..."
+          />
+          <button class="search-button">Search</button>
+        </div>
+        <div class="search-history"></div>
+      </div>
+      <div class="results"></div>
+    </main>
+    <script type="module" src="src/main.js"></script>
   </body>
 </html>

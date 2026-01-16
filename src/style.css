@@ -9,6 +9,11 @@ header {
   margin-bottom: 16px;
 }
 
+h1 {
+  color: #333333;
+  font-weight: 550;
+}
+
 .search-controls {
   display: flex;
   justify-content: center;
@@ -20,13 +25,60 @@ header {
 }
 .search-controls input[type="text"] {
   flex: 1;
-  padding: 8px;
+  padding: 12px;
   font-size: 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #dddddd69;
 }
 .search-controls button {
-  padding: 8px 16px;
+  padding: 8px 12px;
+  background-color: #061daea5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
 }
 
 .search-controls button:hover {
   cursor: pointer;
+}
+
+.country-card {
+  display: grid;
+  grid-template-columns: 160px auto auto;
+  grid-template-rows: auto auto;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 16px;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid #dddddd69;
+  -webkit-box-shadow: 0px 27px 40px 11px rgba(0, 0, 0, 0.098);
+  box-shadow: 0px 27px 40px 11px rgba(0, 0, 0, 0.005);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+strong {
+  color: #808080d2;
+  font-weight: 500;
+}
+
+.country-flag {
+  width: 160px;
+  align-self: start;
+  height: auto;
+  border-radius: 8px;
+}
+
+.country-details > p {
+  margin-bottom: 0;
 }
