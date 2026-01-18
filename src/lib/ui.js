@@ -1,17 +1,28 @@
 import Renderer from "./render.js";
 import searchCountries from "./search.js";
+import { RecentCountries } from "./recent.js";
 
 export default class UI {
   inputField = undefined;
   searchButton = undefined;
   resultsSection = undefined;
+  searchHistorySection = undefined;
+  recentButton = undefined;
 
-  constructor(inputField, searchButton, resultsSection) {
+  constructor(
+    inputField,
+    searchButton,
+    resultsSection,
+    searchHistorySection,
+    recentButton
+  ) {
     this.inputField = inputField;
     this.searchButton = searchButton;
     this.resultsSection = resultsSection;
+    this.searchHistorySection = searchHistorySection;
+    this.recentButton = recentButton;
 
-    this.Renderer = new Renderer(resultsSection);
+    this.Renderer = new Renderer(resultsSection, searchHistorySection);
   }
 
   bindEvents() {
@@ -23,6 +34,18 @@ export default class UI {
         this.handleSearch();
       }
     });
+    this.searchHistorySection.addEventListener("click", (event) => {
+      if (event.target.classList.contains("recent-country-pill")) {
+        const countryName = event.target.textContent.trim();
+        this.inputField.value = countryName;
+        this.handleSearch();
+      }
+    });
+  }
+
+  handleRecent() {
+    const recentCountries = RecentCountries.getRecent();
+    this.Renderer.renderRecentCountries(recentCountries);
   }
 
   async handleSearch() {
@@ -36,6 +59,8 @@ export default class UI {
       this.resultsSection.innerHTML = `<p class="error-message">${error.message}</p>`;
       return;
     }
+
+    this.handleRecent();
     this.Renderer.renderCountries(countries);
   }
 }

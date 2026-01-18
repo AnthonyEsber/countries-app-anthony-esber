@@ -1,4 +1,6 @@
 import fetchCountries from "./data.js";
+import { RecentCountries } from "./recent.js";
+import UI from "./ui.js";
 export default async function searchCountries(query) {
   const q = query.trim();
 
@@ -11,7 +13,11 @@ export default async function searchCountries(query) {
     const lowerQ = q.toLowerCase();
     const filtered = countries.filter((country) => {
       const name = country.name?.common?.toLowerCase() || "";
-      return name.includes(lowerQ);
+      if (name === lowerQ) {
+        RecentCountries.saveRecent([name?.toUpperCase()]);
+      }
+
+      return name === lowerQ || name.includes(lowerQ);
     });
 
     if (filtered.length === 0) {
