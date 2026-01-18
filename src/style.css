@@ -32,15 +32,38 @@ h1 {
   border: 1px solid #dddddd69;
 }
 .search-controls button {
-  padding: 8px 12px;
-  background-color: #061daea5;
+  padding: 10px 20px;
+  background-color: #061dae;
   color: #fff;
   border: none;
   border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(6, 29, 174, 0.2);
 }
 
 .search-controls button:hover {
-  cursor: pointer;
+  background-color: #041259;
+  box-shadow: 0px 6px 12px rgba(6, 29, 174, 0.3);
+  transform: translateY(-2px);
+}
+
+.search-controls button:active {
+  transform: translateY(0);
+  box-shadow: 0px 2px 4px rgba(6, 29, 174, 0.2);
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .country-card {
@@ -55,6 +78,7 @@ h1 {
   border: 1px solid #dddddd69;
   -webkit-box-shadow: 0px 27px 40px 11px rgba(0, 0, 0, 0.098);
   box-shadow: 0px 27px 40px 11px rgba(0, 0, 0, 0.005);
+  animation: fadeInSlide 0.2s ease;
 }
 
 .results {
@@ -81,4 +105,36 @@ strong {
 
 .country-details > p {
   margin-bottom: 0;
+}
+
+.search-history {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.recent-country-pill {
+  padding: 10px 16px;
+  background-color: #061dae;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(6, 29, 174, 0.2);
+}
+
+.recent-country-pill:hover {
+  background-color: #041259;
+  box-shadow: 0px 6px 12px rgba(6, 29, 174, 0.3);
+  transform: translateY(-2px);
+}
+
+.recent-country-pill:active {
+  transform: translateY(0);
+  box-shadow: 0px 2px 4px rgba(6, 29, 174, 0.2);
 }

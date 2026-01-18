@@ -1,6 +1,7 @@
 export default class Renderer {
-  constructor(resultsSection) {
+  constructor(resultsSection, searchHistorySection) {
     this.resultsSection = resultsSection;
+    this.searchHistorySection = searchHistorySection;
   }
 
   createCountryCard({
@@ -64,10 +65,25 @@ export default class Renderer {
     });
   }
 
+  recentCountryPill(countryName) {
+    return `<button class="recent-country-pill">${countryName}</button>`;
+  }
+
   renderCountries(countries) {
     const countriesHTML = countries
       .map((country) => this.countryCard(country))
       .join("");
     this.resultsSection.innerHTML = countriesHTML;
+  }
+
+  renderRecentCountries(countries) {
+    if (countries.length === 0) {
+      return;
+    } else {
+      const recentCountriesHTML = countries
+        .map((country) => this.recentCountryPill(country))
+        .join("");
+      this.searchHistorySection.innerHTML = recentCountriesHTML;
+    }
   }
 }
