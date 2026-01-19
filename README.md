@@ -2,6 +2,8 @@
 
 A web application for searching and exploring countries worldwide with detailed information about capitals, populations, languages, currencies, and geographic locations.
 
+![Country Search App](media/hero.png)
+
 ## Features
 
 - 🔍 **Smart Search** - Search countries by name (minimum 3 characters to trigger search)
@@ -14,8 +16,9 @@ A web application for searching and exploring countries worldwide with detailed 
 
 1. Open `index.html` in your browser
 2. Type a country name (search starts after 3 characters)
-3. Click the star icon to add countries to favorites
-4. Access recent searches and favorites from the sidebar
+3. Traverse country list with arrow keys.
+4. Click the star icon to add countries to favorites
+5. Access recent searches and favorites from the sidebar
 
 ## Tech Stack
 
