@@ -32,6 +32,15 @@ export default class UI {
   }
 
   bindEvents() {
+    this.inputField.addEventListener("input", (e) => {
+      const query = e.target.value.trim();
+
+      if (query.length > 3) {
+        setTimeout(() => this.handleSearch(), 500);
+      } else if (query.length === 0) {
+        this.resultsSection.innerHTML = "";
+      }
+    });
     this.searchButton.addEventListener("click", () => {
       this.handleSearch();
     });
