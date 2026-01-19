@@ -1,6 +1,5 @@
-import fetchCountries from "./data.js";
+import fetchCountries from "./api.js";
 import { RecentCountries } from "./recent.js";
-import UI from "./ui.js";
 export default async function searchCountries(query) {
   const q = query.trim();
 
