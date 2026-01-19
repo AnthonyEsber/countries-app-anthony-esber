@@ -5,14 +5,17 @@ export const App = () => {
   const resultsSection = document.querySelector(".results");
   const searchHistorySection = document.querySelector(".search-history");
   const favoritesSection = document.querySelector(".favorites-section");
+  const showAllButton = document.querySelector(".show-all-button");
 
   const ui = new UI(
     inputField,
     searchButton,
     resultsSection,
     searchHistorySection,
-    favoritesSection
+    favoritesSection,
+    showAllButton
   );
+
   ui.handleDynamicUI();
   ui.bindEvents();
 };

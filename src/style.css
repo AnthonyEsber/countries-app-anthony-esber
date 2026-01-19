@@ -31,7 +31,7 @@ h1 {
   border-radius: 8px;
   border: 1px solid #dddddd69;
 }
-.search-controls button {
+.search-controls .search-button {
   padding: 10px 20px;
   background-color: #061dae;
   color: #fff;
@@ -44,7 +44,7 @@ h1 {
   box-shadow: 0px 4px 8px rgba(6, 29, 174, 0.2);
 }
 
-.search-controls button:hover {
+.search-controls .search-button:hover {
   background-color: #041259;
   box-shadow: 0px 6px 12px rgba(6, 29, 174, 0.3);
   transform: translateY(-2px);
@@ -197,4 +197,28 @@ strong {
   width: 2px;
   background-color: #dddddd69;
   border-radius: 1px;
+}
+
+.search-controls .show-all-button {
+  padding: 10px 20px;
+  background-color: #f7f8ff;
+  color: #333333;
+  border: 1px solid #061dae;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(194, 202, 255, 0.309);
+}
+
+.search-controls .show-all-button:hover {
+  background-color: #e5e9ff;
+  box-shadow: 0px 6px 12px rgba(6, 29, 174, 0.3);
+  transform: translateY(-2px);
+}
+
+[data-active="true"] {
+  background-color: #e0e0e0;
+  outline: 2px solid #007bff;
 }

@@ -2,6 +2,7 @@ import Renderer from "./render.js";
 import searchCountries from "./search.js";
 import { RecentCountries } from "./recent.js";
 import { FavoriteCountries } from "./favorites.js";
+import fetchCountries from "./api.js";
 
 export default class UI {
   inputField = undefined;
@@ -10,19 +11,23 @@ export default class UI {
   searchHistorySection = undefined;
   recentButton = undefined;
   favoritesSection = undefined;
+  showAllButton = undefined;
+  selectedIndex = -1;
 
   constructor(
     inputField,
     searchButton,
     resultsSection,
     searchHistorySection,
-    favoritesSection
+    favoritesSection,
+    showAllButton
   ) {
     this.inputField = inputField;
     this.searchButton = searchButton;
     this.resultsSection = resultsSection;
     this.searchHistorySection = searchHistorySection;
     this.favoritesSection = favoritesSection;
+    this.showAllButton = showAllButton;
 
     this.Renderer = new Renderer(
       resultsSection,
@@ -30,7 +35,6 @@ export default class UI {
       favoritesSection
     );
   }
-
   bindEvents() {
     this.inputField.addEventListener("input", (e) => {
       const query = e.target.value.trim();
@@ -40,6 +44,9 @@ export default class UI {
       } else if (query.length === 0) {
         this.resultsSection.innerHTML = "";
       }
+    });
+    this.showAllButton.addEventListener("click", () => {
+      this.handleAllCountries();
     });
     this.searchButton.addEventListener("click", () => {
       this.handleSearch();
@@ -77,6 +84,34 @@ export default class UI {
         this.handleDynamicUI();
       }
     });
+    document.addEventListener("keydown", (event) => {
+      const listItems = this.resultsSection.querySelectorAll(".country-card");
+      if (event.key == "ArrowDown") {
+        event.preventDefault();
+        this.selectedIndex = (this.selectedIndex + 1) % listItems.length;
+        this.updateSelection(listItems);
+      } else if (event.key == "ArrowUp") {
+        event.preventDefault();
+        this.selectedIndex =
+          (this.selectedIndex - 1 + listItems.length) % listItems.length;
+        this.updateSelection(listItems);
+      } else if (event.key == "Enter") {
+        if (this.selectedIndex >= 0 && this.selectedIndex < listItems.length) {
+          listItems[this.selectedIndex].click();
+        }
+      }
+    });
+  }
+
+  updateSelection(listItems) {
+    listItems.forEach((item, index) => {
+      if (index === this.selectedIndex) {
+        item.setAttribute("data-active", "true");
+        item.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        item.removeAttribute("data-active");
+      }
+    });
   }
 
   handleDynamicUI() {
@@ -112,6 +147,20 @@ export default class UI {
       return;
     }
 
+    this.handleDynamicUI();
+    this.Renderer.renderCountries(countries);
+    this.updateFavoriteIcons();
+  }
+
+  async handleAllCountries() {
+    let countries;
+
+    try {
+      countries = await fetchCountries();
+    } catch (error) {
+      this.resultsSection.innerHTML = `<p class="error-message">${error.message}</p>`;
+      return;
+    }
     this.handleDynamicUI();
     this.Renderer.renderCountries(countries);
     this.updateFavoriteIcons();
