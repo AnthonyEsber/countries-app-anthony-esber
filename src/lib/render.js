@@ -22,6 +22,9 @@ export default class Renderer {
     return `<div class="country-card">
         ${flagImg}
         <div class="country-body">
+        <div class="favorite-icon-container">
+          <i class="favorite-icon">&#9734;</i>
+        </div>
             <h2 class="country-name">${name}</h2>
             <div class="country-details">
                 <p class="country-capital"><strong>Capital:</strong> ${capital}</p>
@@ -65,8 +68,11 @@ export default class Renderer {
     });
   }
 
-  recentCountryPill(countryName) {
-    return `<button class="recent-country-pill">${countryName}</button>`;
+  recentCountryPill(countryName, isFavorite = false) {
+    const className = isFavorite
+      ? "recent-country-pill favorite-pill"
+      : "recent-country-pill";
+    return `<button class="${className}">${countryName}</button>`;
   }
 
   renderCountries(countries) {
@@ -81,9 +87,23 @@ export default class Renderer {
       return;
     } else {
       const recentCountriesHTML = countries
-        .map((country) => this.recentCountryPill(country))
+        .map((country) => this.recentCountryPill(country, false))
         .join("");
       this.searchHistorySection.innerHTML = recentCountriesHTML;
+    }
+  }
+
+  renderFavorites(countries) {
+    if (countries.length === 0) {
+      return;
+    } else {
+      const favoritesHTML = countries
+        .map((country) => this.recentCountryPill(country, true))
+        .join("");
+      const favoritesSection = document.querySelector(".favorites-section");
+      if (favoritesSection) {
+        favoritesSection.innerHTML = `<div class="favorites-list">${favoritesHTML}</div>`;
+      }
     }
   }
 }
