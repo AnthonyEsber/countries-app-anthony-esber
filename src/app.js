@@ -4,13 +4,15 @@ export const App = () => {
   const searchButton = document.querySelector(".search-button");
   const resultsSection = document.querySelector(".results");
   const searchHistorySection = document.querySelector(".search-history");
+  const favoritesSection = document.querySelector(".favorites-section");
 
   const ui = new UI(
     inputField,
     searchButton,
     resultsSection,
-    searchHistorySection
+    searchHistorySection,
+    favoritesSection
   );
+  ui.handleDynamicUI();
   ui.bindEvents();
-  ui.handleRecent();
 };

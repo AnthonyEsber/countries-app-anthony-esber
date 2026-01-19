@@ -14,7 +14,7 @@ export default async function searchCountries(query) {
     const filtered = countries.filter((country) => {
       const name = country.name?.common?.toLowerCase() || "";
       if (name === lowerQ) {
-        RecentCountries.saveRecent([name?.toUpperCase()]);
+        RecentCountries.saveRecent([country.name.common]);
       }
 
       return name === lowerQ || name.includes(lowerQ);
